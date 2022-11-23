@@ -1,0 +1,59 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\log1.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Nov 2022, 16:57:25
+
+{com}. gen logTC = log(cost)
+
+. gen logQ = log(output)
+
+. gen logQ2 = logQ* logQ
+
+. gen logPL = log( Plabor)
+
+. gen logPC = log( Pcapital)
+
+. gen logPF = log( Pfuel)
+
+. renane logPC logPK
+{err}command {bf}renane{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. rename logPC logPK
+{res}
+{com}. reg logTC logQ logPL logPK logPF logQ2
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(5, 139)       = {res}   622.84
+{txt}       Model {c |} {res} 278.630342         5  55.7260684   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 12.4364813       139  .089471088   {txt}R-squared       ={res}    0.9573
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9557
+{txt}       Total {c |} {res} 291.066823       144  2.02129738   {txt}Root MSE        =   {res} .29912
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       logTC{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}logQ {c |}{col 14}{res}{space 2} .1152342{col 26}{space 2} .0614152{col 37}{space 1}    1.88{col 46}{space 3}0.063{col 54}{space 4}-.0061946{col 67}{space 3} .2366631
+{txt}{space 7}logPL {c |}{col 14}{res}{space 2}-.0110636{col 26}{space 2} .2262678{col 37}{space 1}   -0.05{col 46}{space 3}0.961{col 54}{space 4}-.4584353{col 67}{space 3} .4363082
+{txt}{space 7}logPK {c |}{col 14}{res}{space 2}-.5781458{col 26}{space 2} .2611904{col 37}{space 1}   -2.21{col 46}{space 3}0.028{col 54}{space 4}-1.094566{col 67}{space 3}-.0617259
+{txt}{space 7}logPF {c |}{col 14}{res}{space 2} .4844909{col 26}{space 2} .0767329{col 37}{space 1}    6.31{col 46}{space 3}0.000{col 54}{space 4} .3327762{col 67}{space 3} .6362055
+{txt}{space 7}logQ2 {c |}{col 14}{res}{space 2} .0537508{col 26}{space 2} .0053252{col 37}{space 1}   10.09{col 46}{space 3}0.000{col 54}{space 4} .0432219{col 67}{space 3} .0642796
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.1027848{col 26}{space 2} 1.394589{col 37}{space 1}   -0.07{col 46}{space 3}0.941{col 54}{space 4}-2.860135{col 67}{space 3} 2.654565
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. sum logQ
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}logQ {c |}{res}        145    6.556651    1.912792   .6931472   9.724301
+
+{com}. save "C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p3.dta"
+{txt}{p 0 4 2}
+file {bf}
+C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p3.dta{rm}
+saved
+{p_end}
+
+{com}. exit, clear

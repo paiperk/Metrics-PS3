@@ -1,0 +1,188 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\log6.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Nov 2022, 11:18:45
+
+{com}. import excel "C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\PS4data.xls", sheet("data") firstrow
+{res}{text}(8 vars, 220 obs)
+
+{com}. gen Ct = ( realconsumptionofnondurables+ realconsumptionofservices)/ population
+
+. gen Ctlag1 = Ct[_n-1]
+{txt}(1 missing value generated)
+
+{com}. gen Ctlag2 = Ct[_n-2]
+{txt}(2 missing values generated)
+
+{com}. gen Ctlag3 = Ct[_n-3]
+{txt}(3 missing values generated)
+
+{com}. gen Ctlag4 = Ct[_n-4]
+{txt}(4 missing values generated)
+
+{com}. reg Ct Ctlag1 Ctlag2 Ctlag3 Ctlag4
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       216
+{txt}{hline 13}{c +}{hline 34}   F(4, 211)       > {res} 99999.00
+{txt}       Model {c |} {res} .004822372         4  .001205593   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 1.2145e-06       211  5.7561e-09   {txt}R-squared       ={res}    0.9997
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9997
+{txt}       Total {c |} {res} .004823586       215  .000022435   {txt}Root MSE        =   {res} 7.6e-05
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          Ct{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}Ctlag1 {c |}{col 14}{res}{space 2} 1.192335{col 26}{space 2} .0673783{col 37}{space 1}   17.70{col 46}{space 3}0.000{col 54}{space 4} 1.059514{col 67}{space 3} 1.325156
+{txt}{space 6}Ctlag2 {c |}{col 14}{res}{space 2}-.1281352{col 26}{space 2} .1057009{col 37}{space 1}   -1.21{col 46}{space 3}0.227{col 54}{space 4}-.3365003{col 67}{space 3}   .08023
+{txt}{space 6}Ctlag3 {c |}{col 14}{res}{space 2} .1443307{col 26}{space 2}  .105489{col 37}{space 1}    1.37{col 46}{space 3}0.173{col 54}{space 4}-.0636167{col 67}{space 3} .3522782
+{txt}{space 6}Ctlag4 {c |}{col 14}{res}{space 2}-.2074643{col 26}{space 2}   .06753{col 37}{space 1}   -3.07{col 46}{space 3}0.002{col 54}{space 4}-.3405841{col 67}{space 3}-.0743444
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0000244{col 26}{space 2} .0000192{col 37}{space 1}    1.27{col 46}{space 3}0.207{col 54}{space 4}-.0000136{col 67}{space 3} .0000623
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. test Ctlag2= Ctlag3= Ctlag4=0
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}Ctlag2 - Ctlag3 = 0{p_end}
+{p 0 7}{space 1}{text:( 2)}{space 1} Ctlag2 - Ctlag4 = 0{p_end}
+{p 0 7}{space 1}{text:( 3)}{space 1} Ctlag2 = 0{p_end}
+
+{txt}       F(  3,   211) ={res}    8.41
+{txt}{col 13}Prob > F ={res}    0.0000
+
+{com}. save "C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p6.dta"
+{txt}{p 0 4 2}
+file {bf}
+C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p6.dta{rm}
+saved
+{p_end}
+
+{com}. gen Ctlag5 = Ct[_n-5]
+{txt}(5 missing values generated)
+
+{com}. gen Ctlag6 = Ct[_n-6]
+{txt}(6 missing values generated)
+
+{com}. gen Yt = realdisposableincome/ population
+
+. gen Ytlag1 = Yt[_n-1]
+{txt}(1 missing value generated)
+
+{com}. gen deltaCt = log( Ct/ Ctlag1)
+{txt}(1 missing value generated)
+
+{com}. gen deltaCt2 = log( Ctlag2/ Ctlag3)
+{txt}(3 missing values generated)
+
+{com}. gen deltaCt3 = log( Ctlag3/ Ctlag4)
+{txt}(4 missing values generated)
+
+{com}. gen deltaCt4 = log( Ctlag4/ Ctlag5)
+{txt}(5 missing values generated)
+
+{com}. gen deltaCt5 = log( Ctlag5/ Ctlag6).
+{err}unknown function ()
+{txt}{search r(133), local:r(133);}
+
+{com}. gen deltaCt5 = log( Ctlag5/ Ctlag6)
+{txt}(6 missing values generated)
+
+{com}. gen deltaY = log( Yt/ Ytlag1)
+{txt}(1 missing value generated)
+
+{com}. save "C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p6.dta", replace
+{txt}{p 0 4 2}
+file {bf}
+C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p6.dta{rm}
+saved
+{p_end}
+
+{com}. ivregress2 deltaCt ( deltaY = deltaCt2 deltaCt3 deltaCt4 deltaCt5)
+{err}command {bf}ivregress2{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. ivregress 2sls deltaCt ( deltaY = deltaCt2 deltaCt3 deltaCt4 deltaCt5)
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}       214
+{txt}{col 1}{col 51}Wald chi2({res}1{txt}){col 67}= {res}      7.43
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0064
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.0685
+{txt}{col 51}Root MSE{col 67}=    {res} .00501
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     deltaCt{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}deltaY {c |}{col 14}{res}{space 2} .4369273{col 26}{space 2} .1602749{col 37}{space 1}    2.73{col 46}{space 3}0.006{col 54}{space 4} .1227941{col 67}{space 3} .7510604
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0026129{col 26}{space 2} .0009121{col 37}{space 1}    2.86{col 46}{space 3}0.004{col 54}{space 4} .0008253{col 67}{space 3} .0044005
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 14 100}Instrumented: {res:deltaY}{p_end}
+{p 0 14 100}{space 1}Instruments: {res:deltaCt2 deltaCt3 deltaCt4 deltaCt5}{p_end}
+
+{com}. ivregress 2sls deltaCt ( deltaY = deltaCt2 deltaCt3 deltaCt4 deltaCt5), first
+{res}
+{txt}First-stage regressions
+{hline 23}
+
+{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:214}
+{txt}{col 57}{lalign 13:F({res:4}, {res:209})}{col 70} = {res}{ralign 6:2.51}
+{txt}{col 57}{lalign 13:Prob > F}{col 70} = {res}{ralign 6:0.0430}
+{txt}{col 57}{lalign 13:R-squared}{col 70} = {res}{ralign 6:0.0458}
+{txt}{col 57}{lalign 13:Adj R-squared}{col 70} = {res}{ralign 6:0.0276}
+{txt}{col 57}{lalign 13:Root MSE}{col 70} = {res}{ralign 6:0.0099}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      deltaY{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}deltaCt2 {c |}{col 14}{res}{space 2}-.0185907{col 26}{space 2} .1358824{col 37}{space 1}   -0.14{col 46}{space 3}0.891{col 54}{space 4}-.2864664{col 67}{space 3}  .249285
+{txt}{space 4}deltaCt3 {c |}{col 14}{res}{space 2}   .33721{col 26}{space 2} .1367771{col 37}{space 1}    2.47{col 46}{space 3}0.014{col 54}{space 4} .0675704{col 67}{space 3} .6068495
+{txt}{space 4}deltaCt4 {c |}{col 14}{res}{space 2} .1703776{col 26}{space 2} .1363402{col 37}{space 1}    1.25{col 46}{space 3}0.213{col 54}{space 4}-.0984006{col 67}{space 3} .4391559
+{txt}{space 4}deltaCt5 {c |}{col 14}{res}{space 2}-.2218625{col 26}{space 2} .1351864{col 37}{space 1}   -1.64{col 46}{space 3}0.102{col 54}{space 4}-.4883663{col 67}{space 3} .0446413
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0039572{col 26}{space 2} .0012099{col 37}{space 1}    3.27{col 46}{space 3}0.001{col 54}{space 4} .0015721{col 67}{space 3} .0063423
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}       214
+{txt}{col 1}{col 51}Wald chi2({res}1{txt}){col 67}= {res}      7.43
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0064
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.0685
+{txt}{col 51}Root MSE{col 67}=    {res} .00501
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     deltaCt{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}deltaY {c |}{col 14}{res}{space 2} .4369273{col 26}{space 2} .1602749{col 37}{space 1}    2.73{col 46}{space 3}0.006{col 54}{space 4} .1227941{col 67}{space 3} .7510604
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0026129{col 26}{space 2} .0009121{col 37}{space 1}    2.86{col 46}{space 3}0.004{col 54}{space 4} .0008253{col 67}{space 3} .0044005
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 14 100}Instrumented: {res:deltaY}{p_end}
+{p 0 14 100}{space 1}Instruments: {res:deltaCt2 deltaCt3 deltaCt4 deltaCt5}{p_end}
+
+{com}. test deltaY = 0
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}deltaY = 0{p_end}
+
+{txt}{col 12}chi2(  1) ={res}    7.43
+{txt}{col 10}Prob > chi2 =  {res}  0.0064
+
+{com}. estat endogenous
+
+{txt}{col 3}Tests of endogeneity
+{col 3}H0: Variables are exogenous
+
+{col 3}Durbin (score) chi2({res}1{txt}){col 35}={res}{col 37} 1.87759{txt}  (p = {res}0.1706{txt})
+{col 3}Wu-Hausman F({res}1{txt},{res}211{txt}){col 35}={res}{col 37} 1.86765{txt}  (p = {res}0.1732{txt})
+
+{com}. estat overid
+
+{txt}{col 3}Tests of overidentifying restrictions:
+
+{col 3}Sargan (score) chi2({res}3{txt}){col 26}={res}{col 28} 7.73822{txt}{col 38}(p = {res}0.0517{txt})
+{col 3}Basmann chi2({res}3{txt}){col 26}={res}{col 28} 7.84094{txt}{col 38}(p = {res}0.0494{txt})
+
+{com}. save "C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p6.dta", replace
+{txt}{p 0 4 2}
+file {bf}
+C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\p6.dta{rm}
+saved
+{p_end}
+
+{com}. exit, clear

@@ -1,0 +1,47 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\pperkins\OneDrive - London Business School\Desktop\Metrics\ps3\log3.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}17 Nov 2022, 12:14:20
+
+{com}. sdtest wage, by(male)
+
+{txt}Variance ratio test
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. err.{col 47}Std. dev.{col 59}[95% conf. interval]
+{hline 9}{c +}{hline 68}
+       0 {c |}{res}{col 12}  1,569{col 22} 5.146924{col 34} .0726128{col 46} 2.876237{col 58} 5.004495{col 70} 5.289352
+       {txt}1 {c |}{res}{col 12}  1,727{col 22}  6.42461{col 34} .1156353{col 46} 4.805477{col 58} 6.197809{col 70}  6.65141
+{txt}{hline 9}{c +}{hline 68}
+Combined {c |}{res}{col 12}  3,296{col 22} 5.816391{col 34}  .070626{col 46} 4.054693{col 58} 5.677916{col 70} 5.954866
+{txt}{hline 9}{c BT}{hline 68}
+    ratio = sd({res}0{txt}) / sd({res}1{txt})                                         f = {res}  0.3582
+{txt}H0: ratio = 1                                  Degrees of freedom = {res}1568, 1726
+
+    {txt}Ha: ratio < 1               Ha: ratio != 1                 Ha: ratio > 1
+  Pr(F < f) = {res}0.0000         {txt}2*Pr(F < f) = {res}0.0000        {txt}   Pr(F > f) = {res}1.0000
+
+{com}. gen lmale = log(male)
+{txt}(1,569 missing values generated)
+
+{com}. gen lwage = log(wage)
+
+. sdtest lwage, by(male)
+
+{txt}Variance ratio test
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. err.{col 47}Std. dev.{col 59}[95% conf. interval]
+{hline 9}{c +}{hline 68}
+       0 {c |}{res}{col 12}  1,569{col 22} 1.474751{col 34} .0159244{col 46} .6307749{col 58} 1.443516{col 70} 1.505986
+       {txt}1 {c |}{res}{col 12}  1,727{col 22} 1.693011{col 34}  .014566{col 46} .6053204{col 58} 1.664442{col 70}  1.72158
+{txt}{hline 9}{c +}{hline 68}
+Combined {c |}{res}{col 12}  3,296{col 22} 1.589112{col 34} .0109217{col 46} .6270248{col 58} 1.567698{col 70} 1.610527
+{txt}{hline 9}{c BT}{hline 68}
+    ratio = sd({res}0{txt}) / sd({res}1{txt})                                         f = {res}  1.0859
+{txt}H0: ratio = 1                                  Degrees of freedom = {res}1568, 1726
+
+    {txt}Ha: ratio < 1               Ha: ratio != 1                 Ha: ratio > 1
+  Pr(F < f) = {res}0.9527         {txt}2*Pr(F > f) = {res}0.0947        {txt}   Pr(F > f) = {res}0.0473
+
+{com}. 
